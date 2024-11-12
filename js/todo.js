@@ -3,28 +3,42 @@ const toDoInput = toDoForm.querySelector("input");
 // const toDoInput = document.querySelector("#todo-form input");
 const toDoList = document.getElementById("todo-list");
 
+const toDos = [];
+
+function saveToDos() {
+  localStorage.setItem("todos", JSON.stringify(toDos));
+}
+
+function deleteToDo(event) {
+  const li = event.target.parentElement; // 삭제하고싶은 li
+  li.remove();
+}
+
 function paintToDo(newTodo) {
+  // 태그 생성
   const li = document.createElement("li");
   const span = document.createElement("span");
   const button = document.createElement("button");
 
-  // span이 li 안에 있지 않기 때문에 안에 속하도록 변경
-  li.appendChild(span);
+  // 태그 안에 텍스트 삽입
   span.innerText = newTodo;
-
-  // button이 li 태그 안에 위치하도록 변경
-  li.appendChild(button);
   button.innerText = "❌";
 
-  // todolist에 li 추가하기
-  toDoList.appendChild(li);
+  // 버튼 이벤트 생성
+  button.addEventListener("click", deleteToDo);
+
+  li.appendChild(span); // li에 span 추가
+  li.appendChild(button); // li에 button 추가
+  toDoList.appendChild(li); // ul에 li 추가
 }
 
 function handleToDoSubmit(event) {
   event.preventDefault();
   const newTodo = toDoInput.value; // input의 현재 value를 새로운 변수에 복사
   toDoInput.value = "";
+  toDos.push(newTodo);
   paintToDo(newTodo);
+  saveToDos();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
