@@ -6,10 +6,15 @@ const toDoList = document.getElementById("todo-list");
 function paintToDo(newTodo) {
   const li = document.createElement("li");
   const span = document.createElement("span");
+  const button = document.createElement("button");
 
   // span이 li 안에 있지 않기 때문에 안에 속하도록 변경
   li.appendChild(span);
   span.innerText = newTodo;
+
+  // button이 li 태그 안에 위치하도록 변경
+  li.appendChild(button);
+  button.innerText = "❌";
 
   // todolist에 li 추가하기
   toDoList.appendChild(li);
