@@ -7,6 +7,10 @@
     <title>Momentun App</title>
   </head>
   <body>
+    <!-- 현재시간 -->
+    <h2 id="clock">00:00:00</h2>
+
+    <!-- username 입력받거나 username 출력 -->
     <form id="login-form" class="hidden">
       <input
         required
@@ -16,18 +20,25 @@
       />
       <input type="submit" value="Log In" />
     </form>
-
     <h1 id="greeting" class="hidden"></h1>
-    <h2 id="clock">00:00:00</h2>
 
+    <!-- todo list 입력 form-->
+    <form id="todo-form">
+      <input type="text" placeholder="Write a To Do and Press Enter" required/>
+    </form>
+    <!-- todo list 출력 -->
+    <ul id="todo-list"></ul>
+
+    <!-- 명언 출력 -->
     <div id="quote">
-        <span></span>
-        <span></span>
+      <span></span>
+      <span></span>
     </div>
 
     <script src="js/greeting.js"></script>
     <script src="js/clock.js"></script>
     <script src="js/quotes.js"></script>
     <script src="js/background.js"></script>
+    <script src="js/todo.js"></script>
   </body>
 </html>
