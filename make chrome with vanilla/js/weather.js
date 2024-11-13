@@ -1,9 +1,4 @@
-// const API_KEY = "e9e74878c84f31c074d105eb14a2c3b0";
-// import dotenv from "dotenv";
-// dotenv.config();
-
 import KEY from "./env.js";
-// require("dotenv").config();
 
 const API_KEY = KEY.WEATHER_API_KEY;
 
