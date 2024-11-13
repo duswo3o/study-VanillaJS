@@ -5,7 +5,7 @@ const toDoList = document.getElementById("todo-list");
 
 const TODOS_KEY = "todos";
 
-const toDos = [];
+let toDos = [];
 
 function saveToDos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
@@ -45,14 +45,11 @@ function handleToDoSubmit(event) {
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
-function sayHelllo(item) {
-  console.log("this is the turn of", item);
-}
-
 const savedToDos = localStorage.getItem(TODOS_KEY);
 console.log(savedToDos);
 
-if (savedToDos) {
+if (savedToDos !== null) {
   const parsedToDos = JSON.parse(savedToDos);
-  parsedToDos.forEach((item) => console.log("this is turn of", item));
+  toDos = parsedToDos; // 로컬스토리지에 값이 존자하면 기존의 값 복원
+  parsedToDos.forEach(paintToDo);
 }
