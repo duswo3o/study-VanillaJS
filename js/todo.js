@@ -13,17 +13,19 @@ function saveToDos() {
 
 function deleteToDo(event) {
   const li = event.target.parentElement; // 삭제하고싶은 li
+  console.log(li.id);
   li.remove();
 }
 
 function paintToDo(newTodo) {
   // 태그 생성
   const li = document.createElement("li");
+  li.id = newTodo.id;
   const span = document.createElement("span");
   const button = document.createElement("button");
 
   // 태그 안에 텍스트 삽입
-  span.innerText = newTodo;
+  span.innerText = newTodo.text;
   button.innerText = "❌";
 
   // 버튼 이벤트 생성
@@ -38,15 +40,18 @@ function handleToDoSubmit(event) {
   event.preventDefault();
   const newTodo = toDoInput.value; // input의 현재 value를 새로운 변수에 복사
   toDoInput.value = "";
-  toDos.push(newTodo);
-  paintToDo(newTodo);
+  const newTodoObj = {
+    text: newTodo,
+    id: Date.now(),
+  };
+  toDos.push(newTodoObj);
+  paintToDo(newTodoObj);
   saveToDos();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
-console.log(savedToDos);
 
 if (savedToDos !== null) {
   const parsedToDos = JSON.parse(savedToDos);
