@@ -1,8 +1,21 @@
+const API_KEY = "e9e74878c84f31c074d105eb14a2c3b0";
+
 // 위치정보를 받아오는데 성공했을 때 실행할 함수
 function onGeoOk(position) {
   const lat = position.coords.latitude; // 위도
   const lng = position.coords.longitude; // 경도
-  console.log("you live in", lat, lng);
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`;
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      // html의 element 가져오기
+      const weather = document.querySelector("#weather span:first-child");
+      const city = document.querySelector("#weather span:last-child");
+
+      // element안에 텍스트 삽입
+      city.innerText = data.name;
+      weather.innerText = `${data.weather[0].main} / ${data.main.temp}`;
+    });
 }
 
 // 위치정보를 받아오는데 실패했을 때 실행할 함수
