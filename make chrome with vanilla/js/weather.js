@@ -1,4 +1,11 @@
-const API_KEY = "e9e74878c84f31c074d105eb14a2c3b0";
+// const API_KEY = "e9e74878c84f31c074d105eb14a2c3b0";
+// import dotenv from "dotenv";
+// dotenv.config();
+
+import KEY from "./env.js";
+// require("dotenv").config();
+
+const API_KEY = KEY.WEATHER_API_KEY;
 
 // 위치정보를 받아오는데 성공했을 때 실행할 함수
 function onGeoOk(position) {
