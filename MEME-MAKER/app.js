@@ -4,21 +4,27 @@ const ctx = canvas.getContext("2d"); // 캔버스에 그림을 그릴 때 사용
 canvas.width = 800;
 canvas.height = 800;
 
-// 사람 그리기
-// 팔
-ctx.fillRect(210 - 40, 200 - 30, 15, 100);
-ctx.fillRect(350 - 40, 200 - 30, 15, 100);
+ctx.lineWidth = 2; // 선 두께
 
-// 몸통
-ctx.fillRect(260 - 40, 200 - 30, 60, 200);
+const colors = [
+  "#4CAF50",
+  "#FF6F61",
+  "#2196F3",
+  "#FFC107",
+  "#9C27B0",
+  "#795548",
+  "#E91E63",
+  "#607D8B",
+];
 
-// 머리
-ctx.arc(250, 100, 50, 0, 2 * Math.PI);
-ctx.fill();
+// 클릭 이벤트
+function onClick(event) {
+  ctx.beginPath();
+  ctx.moveTo(0, 0); // 시작 좌표
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  ctx.strokeStyle = color;
+  ctx.lineTo(event.offsetX, event.offsetY); // 클릭된 캔버스 내의 좌표
+  ctx.stroke();
+}
 
-// 눈
-ctx.beginPath();
-ctx.fillStyle = "white";
-ctx.arc(260 + 10, 80 + 10, 8, Math.PI, 2 * Math.PI);
-ctx.arc(220 + 10, 80 + 10, 8, Math.PI, 2 * Math.PI);
-ctx.fill();
+canvas.addEventListener("mousemove", onClick);
