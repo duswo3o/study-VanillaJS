@@ -5,16 +5,9 @@ canvas.width = 800;
 canvas.height = 800;
 
 // 사각형 만들기
-ctx.rect(50, 50, 100, 100); // 선 만들기
-ctx.rect(150, 150, 100, 100); // 선 만들기
-ctx.rect(250, 250, 100, 100); // 선 만들기
-ctx.fill();
-
-ctx.beginPath(); // 새 경로 생성
-ctx.rect(350, 350, 100, 100); // 선 만들기
-ctx.rect(450, 450, 100, 100); // 선 만들기
-ctx.fillStyle = "red";
-ctx.fill();
-// setTimeout(() => {
-//   ctx.fill();
-// }, 5000);
+ctx.moveTo(50, 50);
+ctx.lineTo(150, 50);
+ctx.lineTo(150, 150);
+ctx.lineTo(50, 150);
+ctx.lineTo(50, 50);
+ctx.stroke();
