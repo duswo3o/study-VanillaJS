@@ -4,20 +4,21 @@ const ctx = canvas.getContext("2d"); // 캔버스에 그림을 그릴 때 사용
 canvas.width = 800;
 canvas.height = 800;
 
-// 집 그리기
-// 벽
-ctx.fillRect(200, 200, 50, 200);
-ctx.fillRect(400, 200, 50, 200);
+// 사람 그리기
+// 팔
+ctx.fillRect(210 - 40, 200 - 30, 15, 100);
+ctx.fillRect(350 - 40, 200 - 30, 15, 100);
 
-// 문
-// ctx.linewidth = 2; // 선 두께 조정
-ctx.fillRect(300, 300, 50, 100);
+// 몸통
+ctx.fillRect(260 - 40, 200 - 30, 60, 200);
 
-// 천장
-ctx.fillRect(200, 200, 200, 20);
+// 머리
+ctx.arc(250, 100, 50, 0, 2 * Math.PI);
+ctx.fill();
 
-// 지붕(삼각형)
-ctx.moveTo(200, 200);
-ctx.lineTo(325, 100);
-ctx.lineTo(450, 200);
+// 눈
+ctx.beginPath();
+ctx.fillStyle = "white";
+ctx.arc(260 + 10, 80 + 10, 8, Math.PI, 2 * Math.PI);
+ctx.arc(220 + 10, 80 + 10, 8, Math.PI, 2 * Math.PI);
 ctx.fill();
