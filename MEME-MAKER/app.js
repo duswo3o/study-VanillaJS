@@ -5,4 +5,16 @@ canvas.width = 800;
 canvas.height = 800;
 
 // 사각형 만들기
-ctx.fillRect(50, 50, 100, 200) // 즉시 색으로 채우기
+ctx.rect(50, 50, 100, 100); // 선 만들기
+ctx.rect(150, 150, 100, 100); // 선 만들기
+ctx.rect(250, 250, 100, 100); // 선 만들기
+ctx.fill();
+
+ctx.beginPath(); // 새 경로 생성
+ctx.rect(350, 350, 100, 100); // 선 만들기
+ctx.rect(450, 450, 100, 100); // 선 만들기
+ctx.fillStyle = "red";
+ctx.fill();
+// setTimeout(() => {
+//   ctx.fill();
+// }, 5000);
