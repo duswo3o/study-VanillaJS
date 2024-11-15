@@ -8,6 +8,7 @@ const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
 const fileInput = document.getElementById("file");
+const textInput = document.getElementById("text");
 
 // 모드 변경 버튼
 const modeBtn = document.getElementById("mode-btn");
@@ -23,6 +24,7 @@ canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 
 ctx.lineWidth = lineWidth.value; // 선 두께
+ctx.lineCap = "round" // 펜 둥글게 설정
 
 let isPainting = false; // 유저의 painting 상태
 let isFilling = false; // 유저의 그리기 모드
@@ -103,12 +105,24 @@ function onFileChange(event) {
   };
 }
 
+function onDoubleClick(event) {
+  const text = textInput.value;
+  if (text !== "") {
+    ctx.save(); // 현재 상태, 색상, 스타일 등을 저장
+    ctx.lineWidth = 1; // 텍스트 입력을 위해 라인 두께 변경
+    ctx.font = "48px serif ";
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    ctx.restore(); // 이전 저장상태로 복구
+  }
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
 // document.addEventListener("mouseleave", cancelPainting)
 canvas.addEventListener("click", onCanvasClick);
+canvas.addEventListener("dblclick", onDoubleClick);
 
 lineWidth.addEventListener("change", onLineWidthChange);
 color.addEventListener("change", onColorChange);
