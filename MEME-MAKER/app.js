@@ -8,12 +8,16 @@ const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
 
+// 모드 변경 버튼
+const modeBtn = document.getElementById("mode-btn");
+
 canvas.width = 800;
 canvas.height = 800;
 
 ctx.lineWidth = lineWidth.value; // 선 두께
 
 let isPainting = false; // 유저의 painting 상태
+let isFilling = false; // 유저의 그리기 모드
 
 function onMove(event) {
   if (isPainting) {
@@ -50,13 +54,31 @@ function onColorClick(event) {
   color.value = colorValue; // 박스 색깔 변경 (사용자에게 변경을 알려줌)
 }
 
+function onModeClick() {
+  if (isFilling) {
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+  } else {
+    isFilling = true;
+    modeBtn.innerText = "Draw";
+  }
+}
+
+function onCanvasClick() {
+  if (isFilling) {
+    ctx.fillRect(0, 0, 800, 800);
+  }
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
 // document.addEventListener("mouseleave", cancelPainting)
+canvas.addEventListener("click", onCanvasClick);
 
 lineWidth.addEventListener("change", onLineWidthChange);
 color.addEventListener("change", onColorChange);
 
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
+modeBtn.addEventListener("click", onModeClick);
