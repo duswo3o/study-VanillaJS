@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d"); // 캔버스에 그림을 그릴 때 사용
 
 // 입력받는 값
 const lineWidth = document.getElementById("line-width"); // 선 두께
-const color = document.getElementById("color"); // 색깔
+const color = document.getElementById("colors"); // 색깔
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
