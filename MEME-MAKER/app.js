@@ -1,6 +1,9 @@
-const lineWidth = document.getElementById("line-width");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d"); // 캔버스에 그림을 그릴 때 사용
+
+// 입력받는 값
+const lineWidth = document.getElementById("line-width"); // 선 두께
+const color = document.getElementById("color"); // 색깔
 
 canvas.width = 800;
 canvas.height = 800;
@@ -32,6 +35,11 @@ function onLineWidthChange(event) {
   ctx.lineWidth = event.target.value;
 }
 
+function onColorChange(event) {
+  ctx.strokeStyle = event.target.value; // 선 색깔 변경
+  ctx.fillStyle = event.target.value; // 채우기 색깔 변경
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -39,3 +47,4 @@ canvas.addEventListener("mouseleave", cancelPainting);
 // document.addEventListener("mouseleave", cancelPainting)
 
 lineWidth.addEventListener("change", onLineWidthChange);
+color.addEventListener("change", onColorChange);
