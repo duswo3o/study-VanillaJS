@@ -94,9 +94,9 @@ function onEraserClick() {
 
 function onFileChange(event) {
   const file = event.target.files[0];
-  const url = URL.createObjectURL(file);
+  const url = URL.createObjectURL(file); // 유저가 파일을 업로드한 브라우저에서만 사용 가능한 url
 
-  const image = new Image(); // <img src="" />와 같음
+  const image = new Image(); // <img src="" />, document.createElement("img")와 같음
   image.src = url;
 
   // 이미지가 로드되었을 때 함수 실행
