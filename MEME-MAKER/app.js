@@ -9,6 +9,7 @@ const colorOptions = Array.from(
 );
 const fileInput = document.getElementById("file");
 const textInput = document.getElementById("text");
+const saveBtn = document.getElementById("save");
 
 // 모드 변경 버튼
 const modeBtn = document.getElementById("mode-btn");
@@ -24,7 +25,7 @@ canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 
 ctx.lineWidth = lineWidth.value; // 선 두께
-ctx.lineCap = "round" // 펜 둥글게 설정
+ctx.lineCap = "round"; // 펜 둥글게 설정
 
 let isPainting = false; // 유저의 painting 상태
 let isFilling = false; // 유저의 그리기 모드
@@ -116,6 +117,14 @@ function onDoubleClick(event) {
   }
 }
 
+function onSaveClick() {
+  const url = canvas.toDataURL();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "myDrawing.png";
+  a.click();
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -132,5 +141,5 @@ colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click", onEraserClick);
-
 fileInput.addEventListener("change", onFileChange);
+saveBtn.addEventListener("click", onSaveClick);
