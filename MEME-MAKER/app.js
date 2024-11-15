@@ -7,6 +7,7 @@ const color = document.getElementById("color"); // 색깔
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
+const fileInput = document.getElementById("file");
 
 // 모드 변경 버튼
 const modeBtn = document.getElementById("mode-btn");
@@ -88,6 +89,20 @@ function onEraserClick() {
   modeBtn.innerText = "Fill";
 }
 
+function onFileChange(event) {
+  const file = event.target.files[0];
+  const url = URL.createObjectURL(file);
+
+  const image = new Image(); // <img src="" />와 같음
+  image.src = url;
+
+  // 이미지가 로드되었을 때 함수 실행
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    fileInput.value = null;
+  };
+}
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -103,3 +118,5 @@ colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 modeBtn.addEventListener("click", onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click", onEraserClick);
+
+fileInput.addEventListener("change", onFileChange);
