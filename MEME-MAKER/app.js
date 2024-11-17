@@ -17,6 +17,8 @@ const modeBtn = document.getElementById("mode-btn");
 const destroyBtn = document.getElementById("destroy-btn");
 // 지우개 버튼
 const eraserBtn = document.getElementById("eraser-btn");
+// 텍스트 스타일 버튼
+const textFillBtn = document.getElementById("text-style-btn");
 
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 800;
@@ -29,6 +31,7 @@ ctx.lineCap = "round"; // 펜 둥글게 설정
 
 let isPainting = false; // 유저의 painting 상태
 let isFilling = false; // 유저의 그리기 모드
+let textFilling = true; // 글자 채우기 모드
 
 function onMove(event) {
   if (isPainting) {
@@ -46,6 +49,8 @@ function startPainting() {
 
 function cancelPainting() {
   isPainting = false; // 그림 안그리는 중
+  // ctx.fill();
+  // ctx.beginPath();
 }
 
 function onLineWidthChange(event) {
@@ -68,10 +73,10 @@ function onColorClick(event) {
 function onModeClick() {
   if (isFilling) {
     isFilling = false;
-    modeBtn.innerText = "Fill";
+    modeBtn.innerText = " ✏️ Draw";
   } else {
     isFilling = true;
-    modeBtn.innerText = "Draw";
+    modeBtn.innerText = "💧 Fill";
   }
 }
 
@@ -112,7 +117,11 @@ function onDoubleClick(event) {
     ctx.save(); // 현재 상태, 색상, 스타일 등을 저장
     ctx.lineWidth = 1; // 텍스트 입력을 위해 라인 두께 변경
     ctx.font = "48px serif ";
-    ctx.fillText(text, event.offsetX, event.offsetY);
+    if(textFilling) {
+      ctx.fillText(text, event.offsetX, event.offsetY);
+    } else {
+      ctx.strokeText(text, event.offsetX, event.offsetY);
+    }
     ctx.restore(); // 이전 저장상태로 복구
   }
 }
@@ -123,6 +132,16 @@ function onSaveClick() {
   a.href = url;
   a.download = "myDrawing.png";
   a.click();
+}
+
+function onTextStyleClick() {
+  if (textFilling) {
+    textFilling = false;
+    textFillBtn.innerText = "empty Text";
+  } else {
+    textFilling = true;
+    textFillBtn.innerText = "filled Text";
+  }
 }
 
 canvas.addEventListener("mousemove", onMove);
@@ -143,3 +162,5 @@ destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click", onEraserClick);
 fileInput.addEventListener("change", onFileChange);
 saveBtn.addEventListener("click", onSaveClick);
+
+textFillBtn.addEventListener("click", onTextStyleClick);
