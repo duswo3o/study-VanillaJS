@@ -53,13 +53,16 @@ function onMove(event) {
         canvas.addEventListener("click", onCanvasClick);
         return;
       } else if (shapeMode === "square") {
+        ctx.beginPath();
         ctx.fillRect(event.offsetX, event.offsetY, 100, 100);
         return;
       } else if (shapeMode === "circle") {
+        ctx.beginPath();
         ctx.arc(event.offsetX, event.offsetY, 20, 0, 2 * Math.PI);
         ctx.fill();
         return;
       } else if (shapeMode === "triangle") {
+        ctx.beginPath();
         drawTriangle(event);
         ctx.fill();
         return;
