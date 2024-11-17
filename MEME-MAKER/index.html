@@ -73,7 +73,7 @@
         step="0.1"
       />
 
-      <button id="mode-btn">✏️ Draw</button>
+      
       <button id="destroy-btn">💣 Destroy</button>
       <button id="eraser-btn">❌ Erase</button>
 
@@ -90,9 +90,14 @@
     </div>
 
     <div class="btns">
-      <button>square</button>
-      <button>circle</button>
-      <button>triangle</button>
+      <p>mode : <span id="now-mode">✏️ Draw</span> <span id="now-shape">Line</span></p>
+      <!-- <button id="mode-btn">✏️ Draw</button> -->
+      <button id="draw-mode">✏️ Draw</button>
+      <button id="fill-mode">💧 Fill</button>
+      <button id="line-mode" data-shape="line">⏤ line</button>
+      <button id="square-mode" data-shape="square">◻️ square</button>
+      <button id="circle-mode" data-shape="circle">⚪️ circle</button>
+      <button id="triangle-mode" data-shape="triangle">▲ triangle</button>
     </div>
 
     <script src="app.js"></script>
