@@ -48,43 +48,48 @@ let shapeMode = "line";
 
 function onMove(event) {
   if (isPainting) {
-    if (isFilling) {
-      if (shapeMode === "line") {
-        canvas.addEventListener("click", onCanvasClick);
-        return;
-      } else if (shapeMode === "square") {
-        ctx.beginPath();
-        ctx.fillRect(event.offsetX, event.offsetY, 100, 100);
-        return;
-      } else if (shapeMode === "circle") {
-        ctx.beginPath();
-        ctx.arc(event.offsetX, event.offsetY, 20, 0, 2 * Math.PI);
-        ctx.fill();
-        return;
-      } else if (shapeMode === "triangle") {
-        ctx.beginPath();
-        drawTriangle(event);
-        ctx.fill();
-        return;
-      }
-    } else {
-      if (shapeMode === "line") {
-        ctx.lineTo(event.offsetX, event.offsetY);
-        ctx.stroke();
-        return;
-      } else if (shapeMode === "square") {
-        ctx.strokeRect(event.offsetX, event.offsetY, 100, 100);
-        return;
-      } else if (shapeMode === "circle") {
-        ctx.arc(event.offsetX, event.offsetY, 20, 0, 2 * Math.PI);
-        ctx.stroke();
-        return;
-      } else if (shapeMode === "triangle") {
-        drawTriangle(event);
-        ctx.stroke();
-        return;
-      }
+    if (shapeMode === "line" && isFilling === false) {
+      ctx.lineTo(event.offsetX, event.offsetY);
+      ctx.stroke();
+      return;
     }
+    // if (isFilling) {
+    //   if (shapeMode === "line") {
+    //     canvas.addEventListener("click", onCanvasClick);
+    //     return;
+    //   } else if (shapeMode === "square") {
+    //     ctx.beginPath();
+    //     ctx.fillRect(event.offsetX, event.offsetY, 100, 100);
+    //     return;
+    //   } else if (shapeMode === "circle") {
+    //     ctx.beginPath();
+    //     ctx.arc(event.offsetX, event.offsetY, 20, 0, 2 * Math.PI);
+    //     ctx.fill();
+    //     return;
+    //   } else if (shapeMode === "triangle") {
+    //     ctx.beginPath();
+    //     drawTriangle(event);
+    //     ctx.fill();
+    //     return;
+    //   }
+    // } else {
+    //   if (shapeMode === "line") {
+    //     ctx.lineTo(event.offsetX, event.offsetY);
+    //     ctx.stroke();
+    //     return;
+    //   } else if (shapeMode === "square") {
+    //     ctx.strokeRect(event.offsetX, event.offsetY, 100, 100);
+    //     return;
+    //   } else if (shapeMode === "circle") {
+    //     ctx.arc(event.offsetX, event.offsetY, 20, 0, 2 * Math.PI);
+    //     ctx.stroke();
+    //     return;
+    //   } else if (shapeMode === "triangle") {
+    //     drawTriangle(event);
+    //     ctx.stroke();
+    //     return;
+    //   }
+    // }
   }
   ctx.beginPath();
   ctx.moveTo(event.offsetX, event.offsetY);
@@ -134,9 +139,47 @@ function onColorClick(event) {
 //   }
 // }
 
-function onCanvasClick() {
+function onCanvasClick(event) {
+  // if (isFilling) {
+  //   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  // }
   if (isFilling) {
-    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    if (shapeMode === "line") {
+      ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      // canvas.addEventListener("click", onCanvasClick);
+      // return;
+    } else if (shapeMode === "square") {
+      ctx.beginPath();
+      ctx.fillRect(event.offsetX, event.offsetY, 100, 100);
+      return;
+    } else if (shapeMode === "circle") {
+      ctx.beginPath();
+      ctx.arc(event.offsetX, event.offsetY, 20, 0, 2 * Math.PI);
+      ctx.fill();
+      return;
+    } else if (shapeMode === "triangle") {
+      ctx.beginPath();
+      drawTriangle(event);
+      ctx.fill();
+      return;
+    }
+  } else {
+    if (shapeMode === "line") {
+      ctx.lineTo(event.offsetX, event.offsetY);
+      ctx.stroke();
+      return;
+    } else if (shapeMode === "square") {
+      ctx.strokeRect(event.offsetX, event.offsetY, 100, 100);
+      return;
+    } else if (shapeMode === "circle") {
+      ctx.arc(event.offsetX, event.offsetY, 20, 0, 2 * Math.PI);
+      ctx.stroke();
+      return;
+    } else if (shapeMode === "triangle") {
+      drawTriangle(event);
+      ctx.stroke();
+      return;
+    }
   }
 }
 
@@ -208,7 +251,7 @@ canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
 // document.addEventListener("mouseleave", cancelPainting)
-// canvas.addEventListener("click", onCanvasClick);
+canvas.addEventListener("click", onCanvasClick);
 canvas.addEventListener("dblclick", onDoubleClick);
 
 lineWidth.addEventListener("change", onLineWidthChange);
